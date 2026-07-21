@@ -1,14 +1,20 @@
-from flask import Flask, jsonify
+from flask import Flask
+from flask_cors import CORS
+
+from config import Config
+from database import db
+from routes import main
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return jsonify({'message': 'Hello from Flask test app'})
+app.config.from_object(Config)
 
-@app.route('/test')
-def test_route():
-    return jsonify({'status': 'ok', 'detail': 'This is a test route'})
+db.init_app(app)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+CORS(app)
+
+app.register_blueprint(main)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
