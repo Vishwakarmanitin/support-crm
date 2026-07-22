@@ -3,17 +3,34 @@ import { Link } from "react-router-dom";
 function TicketTable({ tickets }) {
   return (
     <div className="mt-8">
-      <div className="w-full overflow-x-auto">
-        <table className="w-max min-w-full bg-white shadow rounded-xl">
+      <div className="w-full overflow-x-auto rounded-xl shadow bg-white">
+        <table className="w-full min-w-max border-collapse">
 
           <thead className="bg-gray-100">
             <tr>
-              <th className="p-4 text-left whitespace-nowrap">Ticket ID</th>
-              <th className="p-4 text-left whitespace-nowrap">Customer</th>
-              <th className="p-4 text-left whitespace-nowrap">Subject</th>
-              <th className="p-4 text-left whitespace-nowrap">Status</th>
-              <th className="p-4 text-left whitespace-nowrap">Created</th>
-              <th className="p-4 text-left whitespace-nowrap">Action</th>
+              <th className="p-4 text-left whitespace-nowrap">
+                Ticket ID
+              </th>
+
+              <th className="p-4 text-left whitespace-nowrap">
+                Customer
+              </th>
+
+              <th className="p-4 text-left whitespace-nowrap">
+                Subject
+              </th>
+
+              <th className="p-4 text-left whitespace-nowrap">
+                Status
+              </th>
+
+              <th className="p-4 text-left whitespace-nowrap">
+                Created
+              </th>
+
+              <th className="p-4 text-left whitespace-nowrap">
+                Action
+              </th>
             </tr>
           </thead>
 
@@ -21,7 +38,7 @@ function TicketTable({ tickets }) {
             {tickets.length === 0 ? (
               <tr>
                 <td
-                  colSpan="6"
+                  colSpan={6}
                   className="p-8 text-center text-gray-500"
                 >
                   No Tickets Found
@@ -29,7 +46,10 @@ function TicketTable({ tickets }) {
               </tr>
             ) : (
               tickets.map((ticket) => (
-                <tr key={ticket.id} className="border-t">
+                <tr
+                  key={ticket.id}
+                  className="border-t hover:bg-gray-50"
+                >
                   <td className="p-4 whitespace-nowrap">
                     {ticket.ticket_id}
                   </td>
@@ -63,7 +83,7 @@ function TicketTable({ tickets }) {
                   <td className="p-4 whitespace-nowrap">
                     <Link
                       to={`/ticket/${ticket.id}`}
-                      className="text-blue-600 hover:underline"
+                      className="text-blue-600 hover:underline font-medium"
                     >
                       View
                     </Link>
