@@ -54,7 +54,7 @@ def get_tickets():
             "subject": ticket.subject,
             "description": ticket.description,
             "status": ticket.status,
-            "created_at": ticket.created_at
+            "created_at": ticket.created_at.strftime("%d %b %Y, %I:%M %p")
         })
 
     return jsonify(result)
@@ -158,3 +158,40 @@ def filter_tickets():
         })
 
     return jsonify(result)
+
+@main.route("/tickets/<int:id>/notes", methods=["GET"])
+def get_notes(id):
+
+    notes = Note.query.filter_by(ticket_id=id).order_by(Note.created_at.desc()).all()
+
+    result = []
+
+    for note in notes:
+        result.append({
+            "id": note.id,
+            "note": note.note,
+            "created_at": note.created_at
+        })
+
+    return jsonify(result)
+
+@main.route("/tickets/check-duplicate", methods=["POST"])
+def check_duplicate():
+
+    data = request.get_json()
+
+    ticket = Ticket.query.filter_by(
+        customer_email=data["customer_email"],
+        subject=data["subject"],
+        status="Open"
+    ).first()
+
+    if ticket:
+        return jsonify({
+            "duplicate": True,
+            "message": "An open ticket with this email and subject already exists."
+        })
+
+    return jsonify({
+        "duplicate": False
+    })

@@ -15,24 +15,43 @@ function DashboardCards({ tickets }) {
   ).length;
 
   const cards = [
-    { title: "Total Tickets", value: total },
-    { title: "Open", value: open },
-    { title: "In Progress", value: progress },
-    { title: "Closed", value: closed },
+    {
+      title: "Total Tickets",
+      value: total,
+      color: "bg-blue-600",
+    },
+    {
+      title: "Open",
+      value: open,
+      color: "bg-red-500",
+    },
+    {
+      title: "In Progress",
+      value: progress,
+      color: "bg-yellow-500",
+    },
+    {
+      title: "Closed",
+      value: closed,
+      color: "bg-green-600",
+    },
   ];
 
   return (
-    <div className="grid md:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
 
       {cards.map((card) => (
 
         <div
           key={card.title}
-          className="bg-white rounded-xl shadow p-6"
+          className={`${card.color} text-white rounded-xl shadow-lg p-6`}
         >
-          <h2 className="text-gray-500">{card.title}</h2>
 
-          <p className="text-4xl font-bold mt-2">
+          <h2 className="text-lg font-semibold">
+            {card.title}
+          </h2>
+
+          <p className="text-4xl font-bold mt-4">
             {card.value}
           </p>
 
@@ -42,6 +61,7 @@ function DashboardCards({ tickets }) {
 
     </div>
   );
+
 }
 
 export default DashboardCards;
