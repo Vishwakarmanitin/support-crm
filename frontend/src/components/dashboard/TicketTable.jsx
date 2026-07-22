@@ -2,24 +2,22 @@ import { Link } from "react-router-dom";
 
 function TicketTable({ tickets }) {
   return (
-    <div className="bg-white shadow rounded-xl mt-8 overflow-hidden">
-      <table className="w-full">
+    <div className="bg-white shadow rounded-xl mt-8 overflow-x-auto">
+      <table className="min-w-[900px] w-full">
 
         <thead className="bg-gray-100">
           <tr>
-            <th className="p-4 text-left">Ticket ID</th>
-            <th className="p-4 text-left">Customer</th>
-            <th className="p-4 text-left">Subject</th>
-            <th className="p-4 text-left">Status</th>
-            <th className="p-4 text-left">Created</th>
-            <th className="p-4 text-left">Action</th>
+            <th className="p-4 text-left whitespace-nowrap">Ticket ID</th>
+            <th className="p-4 text-left whitespace-nowrap">Customer</th>
+            <th className="p-4 text-left whitespace-nowrap">Subject</th>
+            <th className="p-4 text-left whitespace-nowrap">Status</th>
+            <th className="p-4 text-left whitespace-nowrap">Created</th>
+            <th className="p-4 text-left whitespace-nowrap">Action</th>
           </tr>
         </thead>
 
         <tbody>
-
           {tickets.length === 0 ? (
-
             <tr>
               <td
                 colSpan="6"
@@ -28,26 +26,23 @@ function TicketTable({ tickets }) {
                 No Tickets Found
               </td>
             </tr>
-
           ) : (
-
             tickets.map((ticket) => (
-
               <tr key={ticket.id} className="border-t">
 
-                <td className="p-4">
+                <td className="p-4 whitespace-nowrap">
                   {ticket.ticket_id}
                 </td>
 
-                <td className="p-4">
+                <td className="p-4 whitespace-nowrap">
                   {ticket.customer_name}
                 </td>
 
-                <td className="p-4">
+                <td className="p-4 whitespace-nowrap">
                   {ticket.subject}
                 </td>
 
-                <td className="p-4">
+                <td className="p-4 whitespace-nowrap">
                   <span
                     className={`px-3 py-1 rounded-full text-white text-sm ${
                       ticket.status === "Open"
@@ -61,11 +56,11 @@ function TicketTable({ tickets }) {
                   </span>
                 </td>
 
-                <td className="p-4 text-sm text-gray-600">
+                <td className="p-4 text-sm text-gray-600 whitespace-nowrap">
                   {ticket.created_at}
                 </td>
 
-                <td className="p-4">
+                <td className="p-4 whitespace-nowrap">
                   <Link
                     to={`/ticket/${ticket.id}`}
                     className="text-blue-600 hover:underline"
@@ -75,11 +70,8 @@ function TicketTable({ tickets }) {
                 </td>
 
               </tr>
-
             ))
-
           )}
-
         </tbody>
 
       </table>
